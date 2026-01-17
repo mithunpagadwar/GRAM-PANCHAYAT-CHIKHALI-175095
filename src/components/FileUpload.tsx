@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { storage, isConfigured } from '../firebaseConfig';
-import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 
 interface FileUploadProps {
   label: string;
