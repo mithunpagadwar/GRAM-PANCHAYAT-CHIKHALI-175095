@@ -30,22 +30,29 @@ export const FileUpload: React.FC<FileUploadProps> = ({ label, accept = "*", onF
 
     // Create a Storage Ref (folder/filename)
     const storageRef = ref(storage, `uploads/${Date.now()}_${file.name}`);
-    
-    try {
-      // Use uploadBytes for small files (< 1MB) for faster initial response
-      // For larger files, the resumable task is better, but here we prioritize perceived speed
-      const snapshot = await uploadBytes(storageRef, file);
-      const downloadURL = await getDownloadURL(snapshot.ref);
-      setPreview(downloadURL);
-      setUploading(false);
-      setProgress(100);
-      onFileSelect(downloadURL, file.type);
-      console.log('File available at', downloadURL);
-    } catch (error: any) {
-      console.error("Upload failed", error);
-      alert("Upload Failed: " + error.message);
-      setUploading(false);
-    }
+    const uploadTask = uploadBytesResumable(storageRef, file);
+
+    uploadTask.on('state_changed', 
+      (snapshot) => {
+        // Observe state change events such as progress, pause, and resume
+        const p = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        setProgress(p);
+      }, 
+      (error) => {
+        console.error("Upload failed", error);
+        alert("Upload Failed: " + error.message);
+        setUploading(false);
+      }, 
+      () => {
+        // Handle successful uploads on complete
+        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+          setPreview(downloadURL); // Show the CDN URL
+          setUploading(false);
+          onFileSelect(downloadURL, file.type);
+          console.log('File available at', downloadURL);
+        });
+      }
+    );
   };
 
   return (
