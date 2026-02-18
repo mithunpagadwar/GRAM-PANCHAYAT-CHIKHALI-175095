@@ -118,7 +118,7 @@ export const Complaint: React.FC<ComplaintProps> = ({ onSubmit }) => {
                 <FileUpload 
                     label="Upload Photo" 
                     accept="image/*" 
-                    onFileSelect={(url) => setFormData({...formData, applicantPhotoUrl: url})}
+                    onFileSelect={(url: string) => setFormData({...formData, applicantPhotoUrl: url})}
                 />
              </div>
 
@@ -128,7 +128,7 @@ export const Complaint: React.FC<ComplaintProps> = ({ onSubmit }) => {
                 <FileUpload 
                     label="Attach Proof/Doc" 
                     accept="image/*,.pdf" 
-                    onFileSelect={(url) => setFormData({...formData, docUrl: url})}
+                    onFileSelect={(url: string) => setFormData({...formData, docUrl: url})} 
                 />
              </div>
           </div>
