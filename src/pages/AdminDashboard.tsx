@@ -220,7 +220,6 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                  <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center shadow-lg">
                     <i className="fas fa-shield-alt text-white text-3xl"></i>
                  </div>
-             </div>
              <h2 className="text-2xl font-bold text-gray-800">Admin Sign In</h2>
              <p className="text-gray-500 text-sm mt-1">Gram Panchayat Official Portal</p>
              {isConfigured() ? 
@@ -263,8 +262,6 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
               <p>If you get "Password Incorrect", you must delete the user in <br/>
               <a href="https://console.firebase.google.com/" target="_blank" rel="noreferrer" className="text-blue-500 underline">Firebase Console {'>'} Authentication</a> to reset.</p>
           </div>
-        </div>
-      </div>
     );
   }
 
@@ -307,7 +304,6 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                     <i className="fas fa-sign-out-alt"></i> Secure Logout
                 </button>
             </div>
-        </div>
 
         {/* Content */}
         <div className="flex-1 overflow-auto bg-gray-100 relative">
@@ -317,7 +313,6 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
             </div>
 
             <div className="p-6 max-w-6xl mx-auto">
-                
                 {activeTab === 'overview' && (
                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                         <div className="bg-white p-6 rounded-lg shadow-lg border-b-4 border-blue-500">
@@ -336,7 +331,6 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                             <h3 className="text-gray-500 text-sm font-bold uppercase">Meetings</h3>
                             <p className="text-3xl font-bold text-gray-800">{meetings.length}</p>
                         </div>
-                     </div>
                 )}
 
                 {/* --- COMPLAINTS SECTION --- */}
@@ -460,16 +454,11 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                         <i className="fas fa-trash"></i>
                     </button>
                 </div>
-            </div>
-        </div>
-    ))}
-</div>
-)}
+             )}
 
                                     <label className="text-xs font-bold text-gray-500">Designation (Pad)</label>
                                     <input className="border p-2 w-full rounded" placeholder="Position" value={newMember.position || ''} onChange={e => setNewMember({...newMember, position: e.target.value})} />
                                 </div>
-                                <div>
                                     <label className="text-xs font-bold text-gray-500">Mobile Number</label>
                                     <input className="border p-2 w-full rounded" placeholder="Mobile" value={newMember.mobile || ''} onChange={e => setNewMember({...newMember, mobile: e.target.value})} />
                                 </div>
@@ -487,7 +476,6 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                                         <option value="staff">Gram Panchayat Staff (कर्मचारी)</option>
                                     </select>
                                 </div>
-                            </div>
                             <FileUpload label="Member Photo" accept="image/*" onFileSelect={(url: string) => setNewMember({...newMember, photoUrl: url})} />
                             <button onClick={handleAddMember} className="mt-2 bg-gov-primary text-white px-6 py-2 rounded font-bold shadow-lg">Add Member</button>
                          </div>
@@ -510,11 +498,8 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                                          m.type === 'panchayat_samiti' ? 'P. Samiti' : 
                                          m.type === 'ps_staff' ? 'PS Staff' : 'Staff'}
                                     </div>
-                                </div>
-                            ))}
-                         </div>
-                    </div>
-                )}
+                              ))}
+                    
 
                 {/* --- SETTINGS SECTION --- */}
                 {activeTab === 'settings' && (
@@ -526,15 +511,13 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                                     <label className="text-xs font-bold text-gray-500">Panchayat Name</label>
                                     <input className="w-full border p-2 rounded" value={settings.panchayatName} onChange={e => setSettings({...settings, panchayatName: e.target.value})} />
                                 </div>
-                                <div>
                                     <label className="text-xs font-bold text-gray-500">Taluka (Panchayat Samiti)</label>
                                     <input className="w-full border p-2 rounded" value={settings.taluka} onChange={e => setSettings({...settings, taluka: e.target.value})} />
                                 </div>
-                                <div>
                                     <label className="text-xs font-bold text-gray-500">District</label>
                                     <input className="w-full border p-2 rounded" value={settings.district} onChange={e => setSettings({...settings, district: e.target.value})} />
                                 </div>
-                                <div>
+                                
                                     <label className="text-xs font-bold text-gray-500">Contact Email</label>
                                     <input className="w-full border p-2 rounded" value={settings.email} onChange={e => setSettings({...settings, email: e.target.value})} />
                                 </div>
@@ -550,7 +533,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                                             <label className="text-xs font-bold text-gray-500">House Tax UPI ID (घरपट्टी)</label>
                                             <input className="w-full border-2 border-orange-200 p-2 rounded bg-orange-50" value={settings.upiIdHouse || ''} onChange={e => setSettings({...settings, upiIdHouse: e.target.value})} placeholder="e.g. house@oksbi" />
                                          </div>
-                                         <div>
+                                         
                                             <label className="text-xs font-bold text-gray-500">Water Tax UPI ID (पाणीपट्टी)</label>
                                             <input className="w-full border-2 border-blue-200 p-2 rounded bg-blue-50" value={settings.upiIdWater || ''} onChange={e => setSettings({...settings, upiIdWater: e.target.value})} placeholder="e.g. water@oksbi" />
                                          </div>
@@ -558,10 +541,6 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                                             <label className="text-xs font-bold text-gray-500">Special Water Tax UPI ID (खास पाणीपट्टी)</label>
                                             <input className="w-full border-2 border-purple-200 p-2 rounded bg-purple-50" value={settings.upiIdSpecialWater || ''} onChange={e => setSettings({...settings, upiIdSpecialWater: e.target.value})} placeholder="e.g. special@oksbi" />
                                          </div>
-                                     </div>
-                                </div>
-                            </div>
-                        </div>
 
                          {/* Important Links moved to Settings */}
                         <div className="bg-white p-6 rounded-lg shadow">
@@ -584,7 +563,6 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                                     </div>
                                 ))}
                              </div>
-                        </div>
 
                         <div className="bg-white p-6 rounded-lg shadow">
                             <h3 className="text-xl font-bold mb-4 text-gov-primary">Branding (Logo & Slider)</h3>
@@ -593,14 +571,13 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                                 <div className="flex-1">
                                     <FileUpload label="Update Logo" accept="image/*" onFileSelect={(url: string) => setSettings({...settings, logoUrl: url})} />
                                 </div>
-                            </div>
+                            
                             {/* Added Flag Upload */}
                             <div className="flex items-center gap-4 mb-6 border-t pt-4">
                                 <img src={settings.flagUrl || 'https://media.giphy.com/media/l3vRlT2k2L35Cnn5C/giphy.gif'} className="w-16 h-12 border p-1 object-cover" />
                                 <div className="flex-1">
                                     <FileUpload label="Update Tiranga (GIF/Image)" accept="image/*" onFileSelect={(url: string) => setSettings({...settings, flagUrl: url})} />
                                 </div>
-                            </div>
 
                             <div className="border-t pt-4">
                                 <label className="font-bold block mb-2">Slider Images</label>
