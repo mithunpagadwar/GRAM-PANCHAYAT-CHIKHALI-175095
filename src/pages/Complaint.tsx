@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FileUpload } from '../components/FileUpload';
+import FileUpload from '../components/FileUpload';
 import { Complaint as ComplaintType } from '../types';
 
 interface ComplaintProps {
