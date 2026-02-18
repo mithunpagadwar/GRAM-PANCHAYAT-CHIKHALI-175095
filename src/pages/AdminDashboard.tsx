@@ -349,305 +349,125 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                          
                          {complaints.length === 0 ? (
                              <div className="text-center py-12 text-gray-500">
-                                 <i className="fas fa-check-circle text-4xl mb-3 text-green-500"></i>
-                                 <p>No complaints found.</p>
-                             </div>
-                         ) : (
-                             <div className="grid gap-6">
-                                 {complaints.map(c => (
-                                     <div key={c.id} className={`border rounded-lg p-4 flex flex-col md:flex-row gap-4 ${c.status === 'Resolved' ? 'bg-gray-50 border-gray-200' : 'bg-white border-red-200 shadow-sm'}`}>
-                                         {/* Photos Column */}
-                                         <div className="flex-shrink-0 flex gap-2 md:flex-col md:w-32">
-                                             {c.applicantPhotoUrl ? (
-                                                 <div className="w-20 h-20 bg-gray-200 rounded overflow-hidden mx-auto border">
-                                                    <img src={c.applicantPhotoUrl} className="w-full h-full object-cover" alt="Applicant" />
-                                                 </div>
-                                             ) : <div className="w-20 h-20 bg-gray-100 rounded flex items-center justify-center mx-auto text-gray-400 text-xs text-center p-1">No Photo</div>}
-                                             
-                                             {c.docUrl && (
-                                                <a href={c.docUrl} target="_blank" rel="noreferrer" className="text-xs bg-blue-100 text-blue-700 p-2 rounded text-center hover:bg-blue-200">
-                                                    <i className="fas fa-file-alt mr-1"></i> View Doc
-                                                </a>
-                                             )}
-                                         </div>
-
-                                         {/* Info Column */}
-                                         <div className="flex-1">
-                                             <div className="flex justify-between items-start mb-2">
-                                                 <div>
-                                                     <div className="flex items-center gap-2 mb-1">
-                                                        <h4 className="font-bold text-lg text-gray-800">{c.applicantName}</h4>
-                                                        <span className="text-xs bg-blue-100 text-blue-800 px-2 py-0.5 rounded-full font-bold">{c.category}</span>
-                                                     </div>
-                                                     <p className="text-sm text-gray-600"><i className="fas fa-phone mr-1"></i> {c.mobile}</p>
-                                                     <p className="text-xs text-gray-400 mt-1">Date: {c.date} | ID: {c.id}</p>
-                                                 </div>
-                                                 <span className={`px-3 py-1 rounded-full text-xs font-bold uppercase ${c.status === 'Open' ? 'bg-red-500 text-white animate-pulse' : 'bg-green-500 text-white'}`}>
-                                                     {c.status}
-                                                 </span>
-                                             </div>
-                                             <div className="bg-gray-50 p-3 rounded text-sm text-gray-700 border">
-                                                 <span className="font-bold block text-xs text-gray-500 mb-1">COMPLAINT DETAILS:</span>
-                                                 {c.description}
-                                             </div>
-                                             
-                                             <div className="mt-4 flex gap-2 justify-end">
-                                                 <button 
-                                                    onClick={() => toggleComplaintStatus(c.id, c.status)}
-                                                    className={`px-4 py-2 rounded text-sm font-bold shadow transition ${c.status === 'Open' ? 'bg-green-600 text-white hover:bg-green-700' : 'bg-yellow-500 text-white hover:bg-yellow-600'}`}
-                                                 >
-                                                     {c.status === 'Open' ? <><i className="fas fa-check mr-2"></i> Mark Resolved</> : <><i className="fas fa-redo mr-2"></i> Re-open</>}
-                                                 </button>
-                                                 <button 
-                                                    onClick={(e) => deleteComplaint(e, c.id)}
-                                                    className="bg-gray-200 text-gray-700 px-3 py-2 rounded hover:bg-red-100 hover:text-red-600 transition"
-                                                    title="Delete Record"
-                                                 >
-                                                     <i className="fas fa-trash"></i>
-                                                 </button>
-                                             </div>
-                                         </div>
-                                     </div>
-                                 ))}
-                             </div>
-                         )}
+    <i className="fas fa-check-circle text-4xl mb-3 text-green-500"></i>
+    <p>No complaints found.</p>
+</div>
+) : (
+<div className="grid gap-6">
+    {complaints.map((c) => (
+        <div
+            key={c.id}
+            className={`border rounded-lg p-4 flex flex-col md:flex-row gap-4 ${
+                c.status === "Resolved"
+                    ? "bg-gray-50 border-gray-200"
+                    : "bg-white border-red-200 shadow-sm"
+            }`}
+        >
+            {/* Photos Column */}
+            <div className="flex-shrink-0 flex gap-2 md:flex-col md:w-32">
+                {c.applicantPhotoUrl ? (
+                    <div className="w-20 h-20 bg-gray-200 rounded overflow-hidden mx-auto border">
+                        <img
+                            src={c.applicantPhotoUrl}
+                            className="w-full h-full object-cover"
+                            alt="Applicant"
+                        />
+                    </div>
+                ) : (
+                    <div className="w-20 h-20 bg-gray-100 rounded flex items-center justify-center mx-auto text-gray-400 text-xs text-center p-1">
+                        No Photo
                     </div>
                 )}
 
-                {/* --- NOTICES SECTION --- */}
-                {activeTab === 'notices' && (
-                    <div className="space-y-6">
-                         <div className="bg-white p-6 rounded-lg shadow">
-                            <h3 className="text-xl font-bold mb-4 border-b pb-2 text-gov-primary"><i className="fas fa-bell mr-2"></i> Publish Notice</h3>
-                            <div className="space-y-4 mb-6 bg-yellow-50 p-4 rounded border border-yellow-200">
-                                <input className="w-full border p-2 font-bold" placeholder="Notice Title" value={newNotice.title || ''} onChange={e => setNewNotice({...newNotice, title: e.target.value})} />
-                                <textarea className="w-full border p-2 h-20" placeholder="Notice Details..." value={newNotice.content || ''} onChange={e => setNewNotice({...newNotice, content: e.target.value})}></textarea>
-                                
-                                <div className="p-2 border border-yellow-300 rounded bg-white">
-                                    <p className="text-sm font-bold text-gray-600 mb-1">Notice Image/File Upload:</p>
-                                    <FileUpload label="Upload Notice Image" accept="image/*,.pdf" onFileSelect={(url: string) => setNewNotice({...newNotice, mediaUrl: url})}
-                                 />
-                               
-                                <button onClick={handleAddNotice} className="bg-yellow-600 hover:bg-yellow-700 text-white px-6 py-2 rounded font-bold">Publish Notice</button>
-                            </div>
-                         </div>
-                         <div className="bg-white p-6 rounded-lg shadow">
-                            <h3 className="font-bold mb-4">Active Notices</h3>
-                            <div className="space-y-2">
-                                {blogs.filter(b => b.category === 'Notice').length === 0 && <p className="text-gray-500 italic">No notices found.</p>}
-                                {blogs.filter(b => b.category === 'Notice').map(notice => (
-                                    <div key={notice.id} className="flex justify-between items-center bg-gray-50 p-3 rounded border-l-4 border-yellow-500">
-                                        <div className="flex items-center gap-3">
-                                            {notice.mediaUrl && <img src={notice.mediaUrl} className="w-10 h-10 object-cover rounded" alt="Notice" />}
-                                            <div>
-                                                <div className="font-bold">{notice.title}</div>
-                                                <div className="text-xs text-gray-500">{notice.publishDate}</div>
-                                            </div>
-                                        </div>
-                                        <button type="button" onClick={(e) => deleteBlogPost(e, notice.id)} className="bg-red-500 text-white w-8 h-8 rounded flex items-center justify-center hover:bg-red-700 shadow"><i className="fas fa-trash"></i></button>
-                                    </div>
-                                ))}
-                            </div>
-                         </div>
-                    </div>
+                {c.docUrl && (
+                    <a
+                        href={c.docUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="text-xs bg-blue-100 text-blue-700 p-2 rounded text-center hover:bg-blue-200"
+                    >
+                        <i className="fas fa-file-alt mr-1"></i> View Doc
+                    </a>
                 )}
+            </div>
 
-                {/* --- BLOG/NEWS SECTION --- */}
-                {activeTab === 'blog' && (
-                    <div className="space-y-6">
-                        <div className="bg-white p-6 rounded-lg shadow">
-                            <h3 className="text-xl font-bold mb-4 border-b pb-2 text-gov-primary"><i className="fas fa-newspaper mr-2"></i> News & Articles</h3>
-                            <div className="space-y-4 mb-6 bg-blue-50 p-4 rounded border border-blue-200">
-                                <input className="w-full border p-2 font-bold" placeholder="Headline / Title" value={newPost.title || ''} onChange={e => setNewPost({...newPost, title: e.target.value})} />
-                                <textarea className="w-full border p-2 h-32" placeholder="Article Content..." value={newPost.content || ''} onChange={e => setNewPost({...newPost, content: e.target.value})}></textarea>
-                                
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                     <div>
-                                        <label className="block text-sm font-bold mb-1">Media Type</label>
-                                        <select className="border p-2 rounded w-full" value={newPost.mediaType} onChange={e => setNewPost({...newPost, mediaType: e.target.value as any})}>
-                                            <option value="image">Image</option>
-                                            <option value="video">Video</option>
-                                            <option value="youtube">YouTube</option>
-                                        </select>
-                                     </div>
-                                     <div className="pt-6">
-                                        {newPost.mediaType === 'youtube' ? (
-                                            <input 
-                                                className="w-full border p-2" 
-                                                placeholder="YouTube URL" 
-                                                value={newPost.mediaUrl || ''} 
-                                                onChange={e => setNewPost({...newPost, mediaUrl: e.target.value.trim()})} 
-                                            />
-                                        ) : (
-                                            <FileUpload label="Upload Media" accept={newPost.mediaType === 'video' ? 'video/*' : 'image/*'} onFileSelect={(url: string) => setNewPost({...newPost, mediaUrl: url})} />
-                                        )}
-                                     </div>
-                                </div>
-                                <button onClick={handleAddBlog} className="bg-gov-primary text-white px-6 py-2 rounded font-bold">Publish News</button>
-                            </div>
+            {/* Info Column */}
+            <div className="flex-1">
+                <div className="flex justify-between items-start mb-2">
+                    <div>
+                        <div className="flex items-center gap-2 mb-1">
+                            <h4 className="font-bold text-lg text-gray-800">
+                                {c.applicantName}
+                            </h4>
+                            <span className="text-xs bg-blue-100 text-blue-800 px-2 py-0.5 rounded-full font-bold">
+                                {c.category}
+                            </span>
                         </div>
-
-                        <div className="bg-white p-6 rounded-lg shadow">
-                            <h3 className="font-bold mb-4">Recent Posts</h3>
-                            <div className="space-y-4">
-                                {blogs.filter(b => b.category !== 'Notice').length === 0 && <p className="text-gray-500 italic">No posts found.</p>}
-                                {blogs.filter(b => b.category !== 'Notice').map(post => (
-                                    <div key={post.id} className="flex flex-col md:flex-row gap-4 bg-white border p-4 rounded shadow-sm relative">
-                                        <div className="w-full md:w-32 h-24 bg-gray-200 flex-shrink-0">
-                                            {post.mediaUrl ? (
-                                                post.mediaType === 'video' ? <div className="w-full h-full flex items-center justify-center bg-black text-white"><i className="fas fa-play"></i></div> :
-                                                post.mediaType === 'youtube' ? <div className="w-full h-full flex items-center justify-center bg-red-600 text-white"><i className="fab fa-youtube"></i></div> :
-                                                <img src={post.mediaUrl} className="w-full h-full object-cover" />
-                                            ) : (
-                                                <div className="w-full h-full flex items-center justify-center"><i className="fas fa-image text-gray-400"></i></div>
-                                            )}
-                                        </div>
-                                        <div className="flex-1">
-                                            <h4 className="font-bold text-lg">{post.title}</h4>
-                                            <p className="text-sm text-gray-600 line-clamp-2">{post.content}</p>
-                                            <div className="text-xs text-gray-500 mt-2">Published: {post.publishDate}</div>
-                                        </div>
-                                        <button type="button" onClick={(e) => deleteBlogPost(e, post.id)} className="absolute top-2 right-2 bg-red-500 text-white w-8 h-8 rounded flex items-center justify-center hover:bg-red-700 shadow"><i className="fas fa-trash"></i></button>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
+                        <p className="text-sm text-gray-600">
+                            <i className="fas fa-phone mr-1"></i> {c.mobile}
+                        </p>
+                        <p className="text-xs text-gray-400 mt-1">
+                            Date: {c.date} | ID: {c.id}
+                        </p>
                     </div>
-                )}
 
-                {/* --- SCHEMES SECTION --- */}
-                {activeTab === 'schemes' && (
-                    <div className="bg-white p-6 rounded-lg shadow">
-                        <h3 className="text-xl font-bold mb-4 border-b pb-2 text-gov-primary"><i className="fas fa-hand-holding-heart mr-2"></i> Government Schemes</h3>
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4 bg-gray-50 p-4 rounded">
-                            <input placeholder="Scheme Name" className="border p-2 rounded" value={newScheme.name || ''} onChange={e => setNewScheme({...newScheme, name: e.target.value})} />
-                            <input placeholder="Eligibility Criteria" className="border p-2 rounded" value={newScheme.eligibility || ''} onChange={e => setNewScheme({...newScheme, eligibility: e.target.value})} />
-                            <input placeholder="Description" className="border p-2 rounded" value={newScheme.description || ''} onChange={e => setNewScheme({...newScheme, description: e.target.value})} />
-                            <input type="date" className="border p-2 rounded" value={newScheme.deadline || ''} onChange={e => setNewScheme({...newScheme, deadline: e.target.value})} />
-                            <div className="col-span-1 md:col-span-2">
-                                    <FileUpload label="Scheme PDF/Image" accept=".pdf,image/*" onFileSelect={(url: string) => setNewScheme({...newScheme, docUrl: url})} />
-                            </div>
-                            <button onClick={handleAddScheme} className="bg-green-600 text-white font-bold p-2 rounded">Add Scheme</button>
-                        </div>
-                        <ul className="space-y-2">
-                            {schemes.map(s => (
-                                <li key={s.id} className="flex justify-between items-center bg-gray-50 p-3 rounded border">
-                                    <div>
-                                        <div className="font-semibold">{s.name}</div>
-                                        <div className="text-xs text-gray-500">Elig: {s.eligibility}</div>
-                                    </div>
-                                    <button type="button" onClick={(e) => deleteScheme(e, s.id)} className="bg-red-500 text-white w-8 h-8 rounded flex items-center justify-center hover:bg-red-700 shadow"><i className="fas fa-trash"></i></button>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-                )}
+                    <span
+                        className={`px-3 py-1 rounded-full text-xs font-bold uppercase ${
+                            c.status === "Open"
+                                ? "bg-red-500 text-white animate-pulse"
+                                : "bg-green-500 text-white"
+                        }`}
+                    >
+                        {c.status}
+                    </span>
+                </div>
 
-                {/* --- MEETINGS SECTION --- */}
-                {activeTab === 'meetings' && (
-                    <div className="bg-white p-6 rounded-lg shadow h-full">
-                         <h3 className="text-xl font-bold mb-4 border-b pb-2 text-gov-primary">Manage Meetings (Sabha)</h3>
-                         <div className="bg-gray-50 p-4 rounded mb-6 grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <input className="border p-2" placeholder="Meeting Title" value={newMeeting.title || ''} onChange={e => setNewMeeting({...newMeeting, title: e.target.value})} />
-                            <select className="border p-2" value={newMeeting.type} onChange={e => setNewMeeting({...newMeeting, type: e.target.value as any})}>
-                                <option value="Gram Sabha">Gram Sabha</option>
-                                <option value="Masik Sabha">Masik Sabha</option>
-                                <option value="Bal Sabha">Bal Sabha</option>
-                                <option value="Ward Sabha">Ward Sabha</option>
-                            </select>
-                            <input type="date" className="border p-2" value={newMeeting.date || ''} onChange={e => setNewMeeting({...newMeeting, date: e.target.value})} />
-                            <input className="border p-2" placeholder="Description/Agenda" value={newMeeting.description || ''} onChange={e => setNewMeeting({...newMeeting, description: e.target.value})} />
-                            <div className="col-span-1 md:col-span-2">
-                                <FileUpload label="Meeting Photo/Video/Minutes" accept="image/*,video/*,.pdf" onFileSelect={(url: string) => setNewMeeting({...newMeeting, mediaUrl: url})} />
-                            </div>
-                            <button onClick={handleAddMeeting} className="col-span-1 md:col-span-2 bg-gov-secondary text-white py-2 font-bold rounded">Record Meeting</button>
-                         </div>
-                         
-                         <div className="grid gap-4">
-                            {meetings.map(m => (
-                                <div key={m.id} className="border p-4 rounded flex justify-between items-center hover:bg-gray-50">
-                                    <div>
-                                        <span className={`text-xs font-bold px-2 py-1 rounded text-white ${m.type === 'Gram Sabha' ? 'bg-purple-600' : 'bg-blue-600'}`}>{m.type}</span>
-                                        <h4 className="font-bold mt-1">{m.title}</h4>
-                                        <p className="text-sm text-gray-500">{m.date}</p>
-                                    </div>
-                                    <button type="button" onClick={(e) => deleteMeeting(e, m.id)} className="bg-red-500 text-white w-8 h-8 rounded flex items-center justify-center hover:bg-red-700 shadow"><i className="fas fa-trash"></i></button>
-                                </div>
-                            ))}
-                         </div>
-                    </div>
-                )}
+                <div className="bg-gray-50 p-3 rounded text-sm text-gray-700 border">
+                    <span className="font-bold block text-xs text-gray-500 mb-1">
+                        COMPLAINT DETAILS:
+                    </span>
+                    {c.description}
+                </div>
 
-                {/* --- TAX SECTION --- */}
-                {activeTab === 'tax' && (
-                     <div className="bg-white p-6 rounded-lg shadow">
-                         <h3 className="text-xl font-bold mb-4 border-b pb-2 text-gov-primary">Taxation Management</h3>
-                         
-                         {/* Bulk List Upload */}
-                         <div className="mb-8 bg-yellow-50 p-4 rounded border border-yellow-200">
-                             <h4 className="font-bold text-gray-800 mb-2"><i className="fas fa-file-upload mr-2"></i> Upload Tax List (PDF/Image)</h4>
-                             <p className="text-sm text-gray-600 mb-3">Upload the full tax list for public download on the Tax page.</p>
-                             <div className="flex gap-4 items-end">
-                                 <div className="flex-1">
-                                    <FileUpload label="Tax List File" accept=".pdf,image/*" onFileSelect={(url: string) => setSettings({...settings, taxListUrl: url})} />
-                                 </div>
-                                 <div className="pb-4">
-                                     {settings.taxListUrl ? <span className="text-green-600 font-bold"><i className="fas fa-check"></i> List Active</span> : <span className="text-gray-400">No list uploaded</span>}
-                                 </div>
-                             </div>
-                         </div>
+                <div className="mt-4 flex gap-2 justify-end">
+                    <button
+                        onClick={() =>
+                            toggleComplaintStatus(c.id, c.status)
+                        }
+                        className={`px-4 py-2 rounded text-sm font-bold shadow transition ${
+                            c.status === "Open"
+                                ? "bg-green-600 text-white hover:bg-green-700"
+                                : "bg-yellow-500 text-white hover:bg-yellow-600"
+                        }`}
+                    >
+                        {c.status === "Open" ? (
+                            <>
+                                <i className="fas fa-check mr-2"></i>
+                                Mark Resolved
+                            </>
+                        ) : (
+                            <>
+                                <i className="fas fa-redo mr-2"></i>
+                                Re-open
+                            </>
+                        )}
+                    </button>
 
-                         <div className="flex flex-wrap gap-2 mb-4 bg-gray-50 p-4 rounded items-center">
-                             <input className="border p-2 rounded" placeholder="Prop ID" value={newTaxRecord.propertyId || ''} onChange={e => setNewTaxRecord({...newTaxRecord, propertyId: e.target.value})} />
-                             <input className="border p-2 rounded" placeholder="Owner" value={newTaxRecord.ownerName || ''} onChange={e => setNewTaxRecord({...newTaxRecord, ownerName: e.target.value})} />
-                             <select className="border p-2 rounded bg-white" value={newTaxRecord.paymentType} onChange={e => setNewTaxRecord({...newTaxRecord, paymentType: e.target.value as any})}>
-                                 <option value="House Tax">House Tax (घरपट्टी)</option>
-                                 <option value="Water Tax">Water Tax (पाणीपट्टी)</option>
-                                 <option value="Special Water Tax">Special Water Tax (खास पाणीपट्टी)</option>
-                             </select>
-                             <input className="border p-2 rounded w-24" placeholder="Amount" type="number" value={newTaxRecord.amount || ''} onChange={e => setNewTaxRecord({...newTaxRecord, amount: Number(e.target.value)})} />
-                             <button onClick={handleAddTax} className="bg-green-600 text-white px-4 py-2 rounded font-bold">Add Record</button>
-                         </div>
-                         <div className="overflow-x-auto">
-                            <table className="w-full text-sm text-left">
-                                <thead className="bg-gray-100"><tr><th className="p-2">ID</th><th className="p-2">Owner</th><th className="p-2">Type</th><th className="p-2">Amount</th><th className="p-2">Action</th></tr></thead>
-                                <tbody>
-                                    {taxRecords.map(t => (
-                                        <tr key={t.id} className="border-b">
-                                            <td className="p-2">{t.propertyId}</td>
-                                            <td className="p-2">{t.ownerName}</td>
-                                            <td className="p-2">
-                                                <span className={`px-2 py-0.5 rounded text-xs font-bold 
-                                                    ${t.paymentType === 'House Tax' ? 'bg-orange-100 text-orange-800' : 
-                                                      t.paymentType === 'Water Tax' ? 'bg-blue-100 text-blue-800' : 'bg-purple-100 text-purple-800'}`}>
-                                                    {t.paymentType}
-                                                </span>
-                                            </td>
-                                            <td className="p-2">₹{t.amount}</td>
-                                            <td className="p-2">
-                                                <button type="button" onClick={(e) => deleteTax(e, t.id)} className="bg-red-500 text-white w-8 h-8 rounded flex items-center justify-center hover:bg-red-700 shadow">
-                                                    <i className="fas fa-trash"></i>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </table>
-                         </div>
-                     </div>
-                )}
+                    <button
+                        onClick={(e) => deleteComplaint(e, c.id)}
+                        className="bg-gray-200 text-gray-700 px-3 py-2 rounded hover:bg-red-100 hover:text-red-600 transition"
+                    >
+                        <i className="fas fa-trash"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    ))}
+</div>
+)}
+</div>
+)}
 
-                {/* --- MEMBERS SECTION --- */}
-                {activeTab === 'members' && (
-                    <div className="bg-white p-6 rounded-lg shadow">
-                         <h3 className="text-xl font-bold mb-4 border-b pb-2 text-gov-primary">Committee, PESA & Staff Management</h3>
-                         <div className="mb-6 bg-gray-50 p-4 rounded">
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                                <div>
-                                    <label className="text-xs font-bold text-gray-500">Full Name</label>
-                                    <input className="border p-2 w-full rounded" placeholder="Name" value={newMember.name || ''} onChange={e => setNewMember({...newMember, name: e.target.value})} />
-                                </div>
-                                <div>
                                     <label className="text-xs font-bold text-gray-500">Designation (Pad)</label>
                                     <input className="border p-2 w-full rounded" placeholder="Position" value={newMember.position || ''} onChange={e => setNewMember({...newMember, position: e.target.value})} />
                                 </div>
