@@ -6,13 +6,13 @@ import { getAuth } from "firebase/auth";
 
 // Configured with Live Credentials provided by user
 const firebaseConfig = {
-  apiKey: "AIzaSyBkiKQBrYNz9YVR56waGOtDbXtQSl8Jl7I",
-  authDomain: "grampanchayatchikhali-8a314.firebaseapp.com",
-  projectId: "grampanchayatchikhali-8a314",
-  storageBucket: "grampanchayatchikhali-8a314.firebasestorage.app",
-  messagingSenderId: "627147233902",
-  appId: "1:627147233902:web:473219f2d4c2630da3a47f",
-  measurementId: "G-TWDRPV484T"
+  apiKey: "AIzaSyAjsFYYegR3pcS2Jxe4VKwu3swGB5m1rbA",
+  authDomain: "grampanchayat-chikhali-175095.firebaseapp.com",
+  projectId: "grampanchayat-chikhali-175095",
+  storageBucket: "grampanchayat-chikhali-175095.firebasestorage.app",
+  messagingSenderId: "911265701412",
+  appId: "1:911265701412:web:587e5d7565dbe8f0c902b1",
+  measurementId: "G-4SPEJT6BCW"
 };
 
 // Initialize Firebase
