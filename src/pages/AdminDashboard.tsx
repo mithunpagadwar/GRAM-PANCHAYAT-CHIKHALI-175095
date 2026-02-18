@@ -773,7 +773,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                             <div className="flex items-center gap-4 mb-6">
                                 <img src={settings.logoUrl} className="w-16 h-16 border p-1" />
                                 <div className="flex-1">
-                                    <FileUpload label="Update Logo" accept="image/*" onFileSelect={(url) => setSettings({...settings, logoUrl: url})} />
+                                    <FileUpload label="Update Logo" accept="image/*" onFileSelect={(url: string) => setSettings({...settings, logoUrl: url})} />
                                 </div>
                             </div>
                             {/* Added Flag Upload */}
