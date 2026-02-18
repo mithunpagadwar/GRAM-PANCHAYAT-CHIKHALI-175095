@@ -426,7 +426,8 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                                 <div className="p-2 border border-yellow-300 rounded bg-white">
                                     <p className="text-sm font-bold text-gray-600 mb-1">Notice Image/File Upload:</p>
                                     <FileUpload label="Upload Notice Image" accept="image/*,.pdf" onFileSelect={(url: string) => setNewNotice({...newNotice, mediaUrl: url})}
-                                </div>
+                                 }
+                               />
 
                                 <button onClick={handleAddNotice} className="bg-yellow-600 hover:bg-yellow-700 text-white px-6 py-2 rounded font-bold">Publish Notice</button>
                             </div>
