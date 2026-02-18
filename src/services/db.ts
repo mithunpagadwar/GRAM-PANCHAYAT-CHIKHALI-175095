@@ -11,7 +11,7 @@ export const subscribeToCollection = (
   try {
     const q = query(collection(db, collectionName));
     return onSnapshot(q, (snapshot) => {
-      const data = snapshot.docs.map(doc => ({
+      const data = snapshot.doc.map(doc => ({
         id: doc.id,
         ...doc.data()
       }));
