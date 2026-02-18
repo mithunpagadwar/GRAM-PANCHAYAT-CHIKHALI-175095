@@ -465,8 +465,6 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
     ))}
 </div>
 )}
-</div>
-)}
 
                                     <label className="text-xs font-bold text-gray-500">Designation (Pad)</label>
                                     <input className="border p-2 w-full rounded" placeholder="Position" value={newMember.position || ''} onChange={e => setNewMember({...newMember, position: e.target.value})} />
