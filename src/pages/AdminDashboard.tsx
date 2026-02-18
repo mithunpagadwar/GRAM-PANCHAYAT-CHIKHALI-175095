@@ -479,7 +479,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                                                 onChange={e => setNewPost({...newPost, mediaUrl: e.target.value.trim()})} 
                                             />
                                         ) : (
-                                            <FileUpload label="Upload Media" accept={newPost.mediaType === 'video' ? 'video/*' : 'image/*'} onFileSelect={(url) => setNewPost({...newPost, mediaUrl: url})} />
+                                            <FileUpload label="Upload Media" accept={newPost.mediaType === 'video' ? 'video/*' : 'image/*'} onFileSelect={(url: string) => setNewPost({...newPost, mediaUrl: url})} />
                                         )}
                                      </div>
                                 </div>
@@ -525,7 +525,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                             <input placeholder="Description" className="border p-2 rounded" value={newScheme.description || ''} onChange={e => setNewScheme({...newScheme, description: e.target.value})} />
                             <input type="date" className="border p-2 rounded" value={newScheme.deadline || ''} onChange={e => setNewScheme({...newScheme, deadline: e.target.value})} />
                             <div className="col-span-1 md:col-span-2">
-                                    <FileUpload label="Scheme PDF/Image" accept=".pdf,image/*" onFileSelect={(url) => setNewScheme({...newScheme, docUrl: url})} />
+                                    <FileUpload label="Scheme PDF/Image" accept=".pdf,image/*" onFileSelect={(url: string) => setNewScheme({...newScheme, docUrl: url})} />
                             </div>
                             <button onClick={handleAddScheme} className="bg-green-600 text-white font-bold p-2 rounded">Add Scheme</button>
                         </div>
@@ -558,7 +558,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                             <input type="date" className="border p-2" value={newMeeting.date || ''} onChange={e => setNewMeeting({...newMeeting, date: e.target.value})} />
                             <input className="border p-2" placeholder="Description/Agenda" value={newMeeting.description || ''} onChange={e => setNewMeeting({...newMeeting, description: e.target.value})} />
                             <div className="col-span-1 md:col-span-2">
-                                <FileUpload label="Meeting Photo/Video/Minutes" accept="image/*,video/*,.pdf" onFileSelect={(url) => setNewMeeting({...newMeeting, mediaUrl: url})} />
+                                <FileUpload label="Meeting Photo/Video/Minutes" accept="image/*,video/*,.pdf" onFileSelect={(url: string) => setNewMeeting({...newMeeting, mediaUrl: url})} />
                             </div>
                             <button onClick={handleAddMeeting} className="col-span-1 md:col-span-2 bg-gov-secondary text-white py-2 font-bold rounded">Record Meeting</button>
                          </div>
@@ -589,7 +589,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                              <p className="text-sm text-gray-600 mb-3">Upload the full tax list for public download on the Tax page.</p>
                              <div className="flex gap-4 items-end">
                                  <div className="flex-1">
-                                    <FileUpload label="Tax List File" accept=".pdf,image/*" onFileSelect={(url) => setSettings({...settings, taxListUrl: url})} />
+                                    <FileUpload label="Tax List File" accept=".pdf,image/*" onFileSelect={(url: string) => setSettings({...settings, taxListUrl: url})} />
                                  </div>
                                  <div className="pb-4">
                                      {settings.taxListUrl ? <span className="text-green-600 font-bold"><i className="fas fa-check"></i> List Active</span> : <span className="text-gray-400">No list uploaded</span>}
@@ -670,7 +670,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                                     </select>
                                 </div>
                             </div>
-                            <FileUpload label="Member Photo" accept="image/*" onFileSelect={(url) => setNewMember({...newMember, photoUrl: url})} />
+                            <FileUpload label="Member Photo" accept="image/*" onFileSelect={(url: string) => setNewMember({...newMember, photoUrl: url})} />
                             <button onClick={handleAddMember} className="mt-2 bg-gov-primary text-white px-6 py-2 rounded font-bold shadow-lg">Add Member</button>
                          </div>
                          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -780,7 +780,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                             <div className="flex items-center gap-4 mb-6 border-t pt-4">
                                 <img src={settings.flagUrl || 'https://media.giphy.com/media/l3vRlT2k2L35Cnn5C/giphy.gif'} className="w-16 h-12 border p-1 object-cover" />
                                 <div className="flex-1">
-                                    <FileUpload label="Update Tiranga (GIF/Image)" accept="image/*" onFileSelect={(url) => setSettings({...settings, flagUrl: url})} />
+                                    <FileUpload label="Update Tiranga (GIF/Image)" accept="image/*" onFileSelect={(url: string) => setSettings({...settings, flagUrl: url})} />
                                 </div>
                             </div>
 
@@ -791,7 +791,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                                         <img key={i} src={src} className="w-20 h-12 object-cover border" />
                                     ))}
                                 </div>
-                                <FileUpload label="Add Slider Image" accept="image/*" onFileSelect={(url) => setSettings({...settings, sliderImages: [...settings.sliderImages, url]})} />
+                                <FileUpload label="Add Slider Image" accept="image/*" onFileSelect={(url: string) => setSettings({...settings, sliderImages: [...settings.sliderImages, url]})} />
                             </div>
                         </div>
                     </div>
