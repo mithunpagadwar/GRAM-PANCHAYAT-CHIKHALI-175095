@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { AppSettings, BlogPost, Complaint, ImportantLink, MeetingRecord, Member, Scheme, TaxRecord } from '../types';
-import { FileUpload } from '../components/FileUpload';
+import FileUpload from '../components/FileUpload';
 import { addToCollection, deleteFromCollection, updateInCollection } from '../services/db';
 import { isConfigured, auth } from '../firebaseConfig';
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged, signOut, User } from "firebase/auth";
