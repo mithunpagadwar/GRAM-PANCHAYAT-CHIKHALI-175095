@@ -9,7 +9,7 @@ const firebaseConfig = {
   apiKey: "AIzaSyAjsFYYegR3pcS2Jxe4VKwu3swGB5m1rbA",
   authDomain: "grampanchayat-chikhali-175095.firebaseapp.com",
   projectId: "grampanchayat-chikhali-175095",
-  storageBucket: "grampanchayat-chikhali-175095.firebasestorage.app",
+  storageBucket: "grampanchayat-chikhali-175095.appspot.com",
   messagingSenderId: "911265701412",
   appId: "1:911265701412:web:587e5d7565dbe8f0c902b1",
   measurementId: "G-4SPEJT6BCW"
